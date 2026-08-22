@@ -1,0 +1,29 @@
+\begin{tabular}{r | r r r | r r r}
+\toprule
+  \multicolumn{1}{c}{} & \multicolumn{3}{c}{Ewald} & \multicolumn{3}{c}{PME} \\ 
+                   $N$  &              SR+LR (ms)  &                 LR (ms)  &                 LR (\%)  &              SR+LR (ms)  &                 LR (ms)  &                 LR (\%) \\ 
+\midrule
+                     8  &               \num{0.7}  &  \chg{\num{0.2}}{\num{0.3}}  &  \chg{\num{32.4}}{\num{40.7}}  &               \num{0.8}  &  \chg{\num{0.3}}{\num{0.4}}  &  \chg{\num{41.9}}{\num{47.6}} \\ 
+                    64  &  \chg{\num{0.9}}{\num{1.0}}  &               \num{0.4}  &  \chg{\num{45.4}}{\num{43.1}}  &  \chg{\num{1.0}}{\num{1.3}}  &  \chg{\num{0.5}}{\num{0.8}}  &  \chg{\num{50.0}}{\num{59.6}} \\ 
+%                    216  &  \chg{\num{1.5}}{\num{1.2}}  &  \chg{\num{0.8}}{\num{0.4}}  &  \chg{\num{52.1}}{\num{32.0}}  &  \chg{\num{1.3}}{\num{1.5}}  &  \chg{\num{0.6}}{\num{0.7}}  &  \chg{\num{45.6}}{\num{46.3}} \\ 
+                   512  &  \chg{\num{6.4}}{\num{2.0}}  &  \chg{\num{5.3}}{\num{0.9}}  &  \chg{\num{82.6}}{\num{42.9}}  &               \num{2.1}  &  \chg{\num{1.0}}{\num{0.9}}  &  \chg{\num{46.0}}{\num{44.6}} \\ 
+%                   1000  &  \chg{\num{15.4}}{\num{4.5}}  &  \chg{\num{13.6}}{\num{2.6}}  &  \chg{\num{88.4}}{\num{57.3}}  &  \chg{\num{3.2}}{\num{3.1}}  &  \chg{\num{1.4}}{\num{1.2}}  &  \chg{\num{43.3}}{\num{39.2}} \\ 
+                  1728  &  \chg{\num{61.2}}{\num{10.2}}  &  \chg{\num{58.4}}{\num{7.3}}  &  \chg{\num{95.5}}{\num{71.3}}  &  \chg{\num{4.8}}{\num{5.0}}  &  \chg{\num{2.1}}{\num{2.0}}  &  \chg{\num{42.6}}{\num{40.8}} \\ 
+%                   2744  &  \chg{\num{111.7}}{\num{20.7}}  &  \chg{\num{107.6}}{\num{16.2}}  &  \chg{\num{96.3}}{\num{78.5}}  &  \chg{\num{7.6}}{\num{7.7}}  &  \chg{\num{3.4}}{\num{3.3}}  &  \chg{\num{45.1}}{\num{42.7}} \\ 
+                  4096  &  \chg{\num{475.8}}{\num{77.5}}  &  \chg{\num{469.8}}{\num{71.0}}  &  \chg{\num{98.7}}{\num{91.6}}  &  \chg{\num{12.1}}{\num{12.3}}  &  \chg{\num{6.1}}{\num{5.8}}  &  \chg{\num{50.5}}{\num{47.2}} \\ 
+%                   5832  &  \chg{\num{773.3}}{\num{97.9}}  &  \chg{\num{765.0}}{\num{88.8}}  &  \chg{\num{98.9}}{\num{90.8}}  &  \chg{\num{14.5}}{\num{14.8}}  &  \chg{\num{6.2}}{\num{5.7}}  &  \chg{\num{42.4}}{\num{38.8}} \\ 
+                  8000  &   \chg{--}{\num{145.1}}  &   \chg{--}{\num{132.3}}  &    \chg{--}{\num{91.2}}  &  \chg{\num{20.2}}{\num{21.1}}  &  \chg{\num{8.9}}{\num{8.3}}  &  \chg{\num{43.8}}{\num{39.3}} \\ 
+%                  10648  &   \chg{--}{\num{257.4}}  &   \chg{--}{\num{239.3}}  &    \chg{--}{\num{93.0}}  &  \chg{\num{26.1}}{\num{28.8}}  &  \chg{\num{11.2}}{\num{10.7}}  &  \chg{\num{42.9}}{\num{37.3}} \\ 
+%                  13824  &   \chg{--}{\num{534.4}}  &   \chg{--}{\num{510.4}}  &    \chg{--}{\num{95.5}}  &  \chg{\num{33.5}}{\num{37.4}}  &  \chg{\num{14.1}}{\num{13.4}}  &  \chg{\num{42.0}}{\num{35.8}} \\ 
+                 17576  &                      --  &                      --  &                      --  &  \chg{\num{41.5}}{\num{46.3}}  &  \chg{\num{16.9}}{\num{15.7}}  &  \chg{\num{40.7}}{\num{33.9}} \\ 
+%                  21952  &                      --  &                      --  &                      --  &  \chg{\num{51.3}}{\num{58.0}}  &  \chg{\num{20.1}}{\num{18.7}}  &  \chg{\num{39.1}}{\num{32.3}} \\ 
+%                  27000  &                      --  &                      --  &                      --  &  \chg{\num{65.8}}{\num{75.8}}  &  \chg{\num{26.8}}{\num{25.4}}  &  \chg{\num{40.7}}{\num{33.5}} \\ 
+                 32768  &                      --  &                      --  &                      --  &  \chg{\num{101.2}}{\num{110.6}}  &  \chg{\num{51.6}}{\num{46.9}}  &  \chg{\num{51.0}}{\num{42.4}} \\ 
+%                  39304  &                      --  &                      --  &                      --  &   \chg{--}{\num{113.7}}  &    \chg{--}{\num{35.7}}  &    \chg{--}{\num{31.4}} \\ 
+%                  46656  &                      --  &                      --  &                      --  &   \chg{--}{\num{138.0}}  &    \chg{--}{\num{44.3}}  &    \chg{--}{\num{32.1}} \\ 
+%                  54872  &                      --  &                      --  &                      --  &   \chg{--}{\num{163.0}}  &    \chg{--}{\num{51.5}}  &    \chg{--}{\num{31.6}} \\ 
+%                  64000  &                      --  &                      --  &                      --  &   \chg{--}{\num{218.1}}  &    \chg{--}{\num{88.1}}  &    \chg{--}{\num{40.4}} \\ 
+%                  74088  &                      --  &                      --  &                      --  &   \chg{--}{\num{217.8}}  &    \chg{--}{\num{66.2}}  &    \chg{--}{\num{30.4}} \\ 
+%                  85184  &                      --  &                      --  &                      --  &   \chg{--}{\num{256.9}}  &    \chg{--}{\num{82.4}}  &    \chg{--}{\num{32.1}} \\ 
+\bottomrule
+\end{tabular}
