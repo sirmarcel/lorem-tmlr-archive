@@ -1,0 +1,36 @@
+train: adapt/train
+valid: adapt/valid
+test_datasets:
+  train:
+  - adapt/train
+  - false
+  valid:
+  - adapt/valid
+  - false
+  test:
+  - adapt/test
+  - false
+seed: 42
+start_decay_after: 0
+loss_weights:
+  energy: 0.5
+  forces: 0.5
+correct_mean: True
+optimizer: muon
+decay_style: linear
+start_learning_rate: 0.001
+min_learning_rate: 1.0e-06
+max_epochs: 300
+batcher:
+  batch_size: 32
+  coarse_strategy: powers_of_2
+  size_strategy: powers_of_2
+  fine_strategy: powers_of_2
+default_matmul_precision: float32
+worker_count: 12
+worker_buffer_size: 2
+worker_count_valid: 2
+worker_buffer_size_valid: 1
+valid_every_epoch: 2
+benchmark_pipeline: true
+use_wandb: true

@@ -1,0 +1,23 @@
+chunk_size: 1
+correct_mean: true
+decay_style: exponential
+default_matmul_precision: float32
+loss_weights:
+  energy: 0.5
+  forces: 0.5
+max_epochs: 8000
+min_learning_rate: 1e-6
+num_edges: 1024
+num_graphs: 64
+num_nodes: 256
+optimizer: adam
+scale_by_variance: false
+seed: 42
+start_decay_after: 20
+start_learning_rate: 1e-3
+train: 4G/NaCl/train
+use_wandb: true
+valid: 4G/NaCl/valid
+valid_every_epoch: 2
+worker_buffer_size: 2
+worker_count: 6

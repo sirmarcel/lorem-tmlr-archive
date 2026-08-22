@@ -1,0 +1,24 @@
+benchmark_pipeline: false
+chunk_size: 1
+correct_mean: true
+decay_style: linear
+default_matmul_precision: float32
+loss_weights:
+  energy: 0.5
+  forces: 0.5
+max_epochs: 500
+min_learning_rate: 1e-6
+num_edges: 768
+num_graphs: 32
+num_nodes: 192
+optimizer: adam
+scale_by_variance: false
+seed: 23
+start_decay_after: 10
+start_learning_rate: 1e-4
+train: efa/sn2/train
+use_wandb: true
+valid: efa/sn2/valid
+valid_every_epoch: 2
+worker_buffer_size: 2
+worker_count: 4

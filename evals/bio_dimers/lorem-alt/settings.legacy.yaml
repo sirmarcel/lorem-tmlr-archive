@@ -1,0 +1,24 @@
+checkpointers: full
+chunk_size: 32
+correct_mean: true
+decay_style: linear
+default_matmul_precision: float32
+loss_weights:
+  energy: 0.5
+  forces: 0.5
+max_epochs: 4000
+min_learning_rate: 1e-6
+num_edges: 512
+num_graphs: 2
+num_nodes: 32
+optimizer: adam
+scale_by_variance: false
+seed: 42
+start_decay_after: 10
+start_learning_rate: 1e-4
+train: hlhc23/bio_dimers/train_stratified
+use_wandb: true
+valid: hlhc23/bio_dimers/valid_stratified
+valid_every_epoch: 2
+worker_buffer_size: 2
+worker_count: 4

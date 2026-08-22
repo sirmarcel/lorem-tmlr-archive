@@ -1,0 +1,22 @@
+batcher:
+  batch_size: 32
+  max_total_atoms: 128
+correct_mean: true
+decay_style: linear
+default_matmul_precision: float32
+loss_weights:
+  energy: 0.5
+  forces: 0.5
+max_epochs: 2000
+min_learning_rate: 1e-6
+optimizer: lamb
+scale_by_variance: false
+seed: 42
+start_decay_after: 10
+start_learning_rate: 1e-3
+train: cumulene_train
+use_wandb: false
+valid: cumulene_valid
+valid_every_epoch: 2
+worker_buffer_size: 2
+worker_count: 4
