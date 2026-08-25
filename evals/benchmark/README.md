@@ -1,6 +1,6 @@
 # Runtime benchmark
 
-Timing data for Ewald vs PME long-range summation in LOREM, reported in Appendix A.2 (Tables A.1-A.3, Figure A.1).
+Timing data for Ewald vs PME long-range summation in LOREM, reported in Appendix E (the runtime-benchmark scaling figure and per-crystal timing tables).
 
 ## Setup
 

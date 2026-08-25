@@ -3,6 +3,7 @@ import numpy as np
 from ase.io import read
 import tqdm
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+from pathlib import Path
 
 
 def assign_calculators(systems, calculator):

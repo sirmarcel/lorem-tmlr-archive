@@ -2,7 +2,7 @@
 
 Revised Ewald-vs-PME timing data for the long-range summation in LOREM.
 
-The original benchmark in `../benchmark/` compared the two methods at unmatched accuracy: it set both the Ewald k-space cutoff and the PME mesh spacing to `cutoff/8`, which over-converges Ewald (to near machine precision) while PME delivers a relative force error of ~1.3e-2 (rattled NaCl-64, fp64). This folder contains a re-run of the comparison with settings matched at equal force accuracy. It underlies the revised runtime benchmark in the paper (Appendix A.2: the scaling figure and Tables A.1-A.3) and the comparison document `../../tex/comparison.tex`; the originally-published timings remain in `../benchmark/`.
+The original benchmark in `../benchmark/` compared the two methods at unmatched accuracy: it set both the Ewald k-space cutoff and the PME mesh spacing to `cutoff/8`, which over-converges Ewald (to near machine precision) while PME delivers a relative force error of ~1.3e-2 (rattled NaCl-64, fp64). This folder contains a re-run of the comparison with settings matched at equal force accuracy. It underlies the revised runtime benchmark in the paper (Appendix E: the scaling figure and per-crystal timing tables) and the comparison document `../../tex/comparison.tex`; the originally-published timings remain in `../benchmark/`.
 
 ## Regimes
 

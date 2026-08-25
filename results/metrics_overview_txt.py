@@ -9,12 +9,17 @@ for experiment in ["AuMgO", "bio_dimers", "cumulene", "NaCl"]:
         dct = {k: v[key] for k, v in data.items() if key in v}
         best = min(dct, key=dct.get)
 
-        row = list(dct.values())
-        row = map_across([row], rounder(3))[0]
-
-        for i, k in enumerate(dct.keys()):
-            if k == best:
-                row[i] = "*" + row[i] + "*"
+        # emit a placeholder for models without this metric, so the row
+        # stays aligned with the full column header
+        num = rounder(3)
+        row = []
+        for k in data.keys():
+            if k not in dct:
+                row.append("--")
+            elif k == best:
+                row.append("*" + num(dct[k]) + "*")
+            else:
+                row.append(num(dct[k]))
 
         return row
 

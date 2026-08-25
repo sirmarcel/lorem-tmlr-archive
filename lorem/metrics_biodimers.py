@@ -8,6 +8,4 @@ from marathon.data import datasets
 
 calc = Calculator.from_checkpoint("run/checkpoints/R2_E+F", add_offset=True)
 
-workdir = Path().cwd() / "metrics"
-workdir.mkdir()
-main(calc, datasets, workdir=workdir)
+main(calc, datasets)

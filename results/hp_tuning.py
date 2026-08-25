@@ -29,7 +29,7 @@ for tag, experiment in {"mgo": "AuMgO", "nacl": "NaCl"}.items():
     table = "\n".join([
         r"\begin{tabular}{r|cc}",
         r"\toprule",
-        r"Model & Test RMSE $E$ (meV/atom) & Test RMSE $\F$ (meV/\unit{\angstrom}) \\",
+        r"Model & Valid. RMSE $E$ (meV/atom) & Valid. RMSE $\F$ (meV/\unit{\angstrom}) \\",
         r"\midrule",
         body,
         r"\bottomrule",

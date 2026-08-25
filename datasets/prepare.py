@@ -1,4 +1,3 @@
-import jax
 import numpy as np
 
 from marathon.data import datasets
@@ -7,32 +6,43 @@ from ase.io import read
 from marathon import comms
 from marathon.extra.hermes.data_source import prepare, DataSource
 
+
+# The heaviest training .xyz files are excluded from the git repository (the
+# complete archive lives on Zenodo); skip their blocks gracefully if absent.
+def have(*names):
+    gone = [n for n in names if not (datasets / n).exists()]
+    if gone:
+        print(f"skipping: {', '.join(gone)} not present (see README.md for provenance)")
+    return not gone
+
+
 # -- AuMgO --
-reporter = comms.reporter()
-reporter.start("processing AuMgO")
+if have("AuMgO_train.xyz"):
+    reporter = comms.reporter()
+    reporter.start("processing AuMgO")
 
-reporter.step("load")
-train = read(datasets / "AuMgO_train.xyz", format="extxyz", index=":")
-valid = read(datasets / "AuMgO_valid.xyz", format="extxyz", index=":")
+    reporter.step("load")
+    train = read(datasets / "AuMgO_train.xyz", format="extxyz", index=":")
+    valid = read(datasets / "AuMgO_valid.xyz", format="extxyz", index=":")
 
-reporter.step("process")
-prepare(
-    train,
-    folder=datasets / "AuMgO_train",
-    reporter=reporter,
-    batch_size=500,
-    samples_per_composition=100,
-)
+    reporter.step("process")
+    prepare(
+        train,
+        folder=datasets / "AuMgO_train",
+        reporter=reporter,
+        batch_size=500,
+        samples_per_composition=100,
+    )
 
-prepare(
-    valid,
-    folder=datasets / "AuMgO_valid",
-    reporter=reporter,
-    batch_size=500,
-    samples_per_composition=100,
-)
+    prepare(
+        valid,
+        folder=datasets / "AuMgO_valid",
+        reporter=reporter,
+        batch_size=500,
+        samples_per_composition=100,
+    )
 
-reporter.done()
+    reporter.done()
 
 # -- bio_dimers --
 
@@ -92,62 +102,60 @@ prepare(
 reporter.done()
 
 # -- NaCl --
+if have("NaCl_train.xyz"):
+    reporter = comms.reporter()
+    reporter.start("processing NaCl")
 
-reporter = comms.reporter()
-reporter.start("processing NaCl")
+    reporter.step("load")
+    train = read(datasets / "NaCl_train.xyz", format="extxyz", index=":")
+    valid = read(datasets / "NaCl_valid.xyz", format="extxyz", index=":")
 
-reporter.step("load")
-train = read(datasets / "NaCl_train.xyz", format="extxyz", index=":")
-valid = read(datasets / "NaCl_valid.xyz", format="extxyz", index=":")
+    reporter.step("process")
+    prepare(
+        train,
+        folder=datasets / "NaCl_train",
+        reporter=reporter,
+        batch_size=500,
+        samples_per_composition=100,
+    )
 
+    prepare(
+        valid,
+        folder=datasets / "NaCl_valid",
+        reporter=reporter,
+        batch_size=500,
+        samples_per_composition=100,
+    )
 
-reporter.step("process")
-prepare(
-    train,
-    folder=datasets / "NaCl_train",
-    reporter=reporter,
-    batch_size=500,
-    samples_per_composition=100,
-)
-
-prepare(
-    valid,
-    folder=datasets / "NaCl_valid",
-    reporter=reporter,
-    batch_size=500,
-    samples_per_composition=100,
-)
-
-reporter.done()
+    reporter.done()
 
 # -- SN2 --
+if have("sn2_train.xyz"):
+    reporter = comms.reporter()
+    reporter.start("processing SN2")
 
-reporter = comms.reporter()
-reporter.start("processing SN2")
+    reporter.step("load")
+    train = read(datasets / "sn2_train.xyz", format="extxyz", index=":")
+    valid = read(datasets / "sn2_valid.xyz", format="extxyz", index=":")
 
-reporter.step("load")
-train = read(datasets / "sn2_train.xyz", format="extxyz", index=":")
-valid = read(datasets / "sn2_valid.xyz", format="extxyz", index=":")
+    reporter.step("process")
+    prepare(
+        train,
+        folder=datasets / "sn2_train",
+        reporter=reporter,
+        batch_size=500,
+        samples_per_composition=100,
+    )
 
+    prepare(
+        valid,
+        folder=datasets / "sn2_valid",
+        reporter=reporter,
+        batch_size=500,
+        samples_per_composition=100,
+    )
 
-reporter.step("process")
-prepare(
-    train,
-    folder=datasets / "sn2_train",
-    reporter=reporter,
-    batch_size=500,
-    samples_per_composition=100,
-)
-
-prepare(
-    valid,
-    folder=datasets / "sn2_valid",
-    reporter=reporter,
-    batch_size=500,
-    samples_per_composition=100,
-)
-
-reporter.done()
+    reporter.done()
 
 # -- ADAPT --
 #
@@ -196,34 +204,35 @@ def prepare_adapt(train_all, name, seed, valid_fraction, reporter):
 reporter = comms.reporter()
 reporter.start("processing ADAPT")
 
-reporter.step("load")
-train_all = read(
-    datasets / "adapt/dataset_train_pbc_updated.xyz",
-    format="extxyz",
-    index=":",
-)
-test = read(datasets / "adapt_test_official.xyz", format="extxyz", index=":")
-
-# rename REF_* labels and attach a SinglePointCalculator
-for at in train_all:
-    at.arrays["forces"] = at.arrays["REF_forces"]
-    at.info["energy"] = at.info["REF_energy"]
-    at.calc = SinglePointCalculator(
-        at, energy=at.info["energy"], forces=at.arrays["forces"]
+if have("adapt/dataset_train_pbc_updated.xyz"):
+    reporter.step("load")
+    train_all = read(
+        datasets / "adapt/dataset_train_pbc_updated.xyz",
+        format="extxyz",
+        index=":",
     )
 
-# -- full dataset: seed=23, 20% valid --
-prepare_adapt(train_all, "", seed=23, valid_fraction=0.20, reporter=reporter)
+    # rename REF_* labels and attach a SinglePointCalculator
+    for at in train_all:
+        at.arrays["forces"] = at.arrays["REF_forces"]
+        at.info["energy"] = at.info["REF_energy"]
+        at.calc = SinglePointCalculator(
+            at, energy=at.info["energy"], forces=at.arrays["forces"]
+        )
 
-# -- debug subset: 10,000 structures, seed=0, 5% valid --
-# used for HP sweep (24 combinations, 100 epochs; see paper Sec. A.5)
-rng_debug = np.random.default_rng(0)
-debug_indices = np.arange(len(train_all))
-rng_debug.shuffle(debug_indices)
-train_debug = [train_all[i] for i in debug_indices[:10000]]
-prepare_adapt(train_debug, "debug", seed=0, valid_fraction=0.05, reporter=reporter)
+    # -- full dataset: seed=23, 20% valid --
+    prepare_adapt(train_all, "", seed=23, valid_fraction=0.20, reporter=reporter)
 
-# -- test set --
+    # -- debug subset: 10,000 structures, seed=0, 5% valid --
+    # used for HP sweep (24 combinations, 100 epochs; see paper Appendix J)
+    rng_debug = np.random.default_rng(0)
+    debug_indices = np.arange(len(train_all))
+    rng_debug.shuffle(debug_indices)
+    train_debug = [train_all[i] for i in debug_indices[:10000]]
+    prepare_adapt(train_debug, "debug", seed=0, valid_fraction=0.05, reporter=reporter)
+
+# -- test set (adapt_test_official.xyz ships with the archive) --
+test = read(datasets / "adapt_test_official.xyz", format="extxyz", index=":")
 prepare(
     test,
     folder=datasets / "adapt/test_official",
