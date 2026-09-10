@@ -68,7 +68,7 @@ for j, c in enumerate(classes):
 
 from matplotlib.lines import Line2D
 std_handle = Line2D(
-    [0], [0], color="black", linewidth=2.5, label=r"std of $|\mathbf{F}|$"
+    [0], [0], color="black", linewidth=2.5, label=r"std of $\mathbf{F}$"
 )
 
 

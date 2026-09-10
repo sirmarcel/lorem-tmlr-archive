@@ -75,7 +75,7 @@ for j, c in enumerate(classes):
         zorder=10,
     )
 from matplotlib.lines import Line2D
-std_handle = Line2D([0], [0], color="black", linewidth=2.5, label=r"std of $|\mathbf{F}|$")
+std_handle = Line2D([0], [0], color="black", linewidth=2.5, label=r"std of $\mathbf{F}$")
 
 
 # zoom-in / limit the view to different portions of the data

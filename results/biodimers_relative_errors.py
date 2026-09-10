@@ -23,7 +23,7 @@ def print_table(title, value_fn):
 
 print("% biodimers: per-class force errors")
 print(
-    "% std of |F| (meV/A): "
+    "% std of force components (meV/A): "
     + ", ".join(f"{c}={class_force_std[c]:.2f}" for c in classes)
 )
 print("%")

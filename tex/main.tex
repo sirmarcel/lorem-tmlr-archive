@@ -414,14 +414,14 @@ We note that the sharp cusp at \qty{180}{\degree} is an artifact of the underlyi
     \end{tikzpicture}
     \caption{
     ($\mathbf{A}$) Charge-charge pair from the biodimers dataset.
-    ($\mathbf{B}$) Mean absolute error on forces for different models on the different dimer classes\revs{: Apolar-apolar (AA), charge-apolar (CA), charge-charge (CC), charge-polar (CP), polar-apolar (PA), polar-polar (PP)} \rev{ (ordered by increasing dominant power-law exponent $p$; see \cref{fig:bio-dimers-rmse}). Black bars indicate the per-class standard deviation of $|\mathbf{F}|$;}\revs{. Note that} the vertical axis has been split at \qty{2.75}{meV\per\angstrom}.
+    ($\mathbf{B}$) Mean absolute error on forces for different models on the different dimer classes\revs{: Apolar-apolar (AA), charge-apolar (CA), charge-charge (CC), charge-polar (CP), polar-apolar (PA), polar-polar (PP)} \rev{ (ordered by increasing dominant power-law exponent $p$; see \cref{fig:bio-dimers-rmse}). Black bars indicate the per-class standard deviation of force components;}\revs{. Note that} the vertical axis has been split at \qty{2.75}{meV\per\angstrom}.
     }
     \label{fig:bio_dimers}
 \end{figure}
 
 \paragraph{Biodimers}
 Since the pairs of molecules in the biodimers benchmark are placed at separations up to \qty{15}{\angstrom}, much beyond the cutoff used for graph construction, high accuracy requires a long-range component.
-This is confirmed by the results of this experiment, seen in \cref{fig:bio_dimers}: The long range \lorem and \cace models yield lower error than \mace and \pet, \rev{with \lorem achieving the highest accuracy in all cases}. Predictive error varies between dimer classes, i.e., the expected type of inverse power-law interaction, for all models\revs{, with the exception for \lorem, which yields consistent, and in all but one class the highest, accuracy}. \revs{It is important to note that }\lorem uses $p=1$ (Coulomb) for long-range message passing\revs{ while different exponents describe the \emph{underlying physics} of the dimer classes: The nonlinearity after the long-range message passing block may allow the model to correct this mismatch between exponents}\rev{; correspondingly, \lorem's relative force error (MAE divided by per-class standard deviation) grows monotonically with $p$, from around \qty{5}{\percent} for charge-charge to over \qty{70}{\percent} for apolar-apolar. \cace, which also uses $p=1$, exhibits the same trend, suggesting that the post-LR nonlinearity does not fully rescue this exponent mismatch \citep{hlhc2023}. An extension of \lorem to multiple exponents is straightforward and will be investigated in future work.}\revs{; see also the supplement of \citep{hlhc2023}.}
+This is confirmed by the results of this experiment, seen in \cref{fig:bio_dimers}: The long range \lorem and \cace models yield lower error than \mace and \pet, \rev{with \lorem achieving the highest accuracy in all cases}. Predictive error varies between dimer classes, i.e., the expected type of inverse power-law interaction, for all models\revs{, with the exception for \lorem, which yields consistent, and in all but one class the highest, accuracy}. \revs{It is important to note that }\lorem uses $p=1$ (Coulomb) for long-range message passing\revs{ while different exponents describe the \emph{underlying physics} of the dimer classes: The nonlinearity after the long-range message passing block may allow the model to correct this mismatch between exponents}\rev{; correspondingly, \lorem's relative force error (MAE divided by per-class standard deviation) grows with $p$, from around \qty{5}{\percent} for charge-charge to over \qty{70}{\percent} for apolar-apolar. \cace, which also uses $p=1$, exhibits the same trend, suggesting that the post-LR nonlinearity does not fully rescue this exponent mismatch \citep{hlhc2023}. An extension of \lorem to multiple exponents is straightforward and will be investigated in future work.}\revs{; see also the supplement of \citep{hlhc2023}.}
 
 
 \subsection{Limits of short-range message passing}
@@ -497,11 +497,15 @@ The authors would like to thank Matthias~Kellner, Filippo~Bigi, J.~Thorben~Frank
 
 \subsubsection*{Post-Publication Changes}
 
-While preparing the public data archive after acceptance, we identified two issues. Both sets of results are retained in the data archive.
+While preparing the public data archive after acceptance, we identified the issues described below. For the two larger ones, both sets of results are retained in the data archive.
 
-\textbf{Biodimers per-class metrics \emph{(substantive)}.} The per-class force and energy errors were computed by indexing the flattened, per-atom forces array with system-level indices, mixing atoms across the wrong dimer classes; aggregate cross-class metrics were essentially unaffected, but the per-class breakdown shifted by up to a factor of two. After re-running with corrected indexing, \lorem now achieves the lowest force MAE and RMSE in all six dimer classes (originally reported as ``best in all but one''). More importantly, the corrected per-class data no longer supports the originally published claim that the post-LR nonlinearity corrects the mismatch between \lorem's internal Coulomb exponent ($p=1$) and the physical multipole exponents ($p=1$ to $p=6$) of the dimer classes: relative force error grows monotonically with the dominant exponent, from $\sim\qty{5}{\percent}$ at charge--charge to over $\qty{70}{\percent}$ at apolar--apolar, and \cace (also $p=1$) shows the same trend. We have retracted that claim and replaced it with the weaker statement that the nonlinearity only partially compensates for the exponent mismatch, noting that an extension to multiple long-range exponents in parallel is a natural follow-up. \cref{fig:bio_dimers,fig:ablation-bio_dimers,fig:bio-dimers-rmse} and the biodimers paragraph in \cref{sec:experiments} are updated accordingly. We added the standard deviation to the plots to contextualize the errors more explicitly.
+\textbf{Biodimers per-class metrics \emph{(substantive)}.} The per-class force and energy errors were computed by indexing the flattened, per-atom forces array with system-level indices, mixing atoms across the wrong dimer classes; aggregate cross-class metrics were essentially unaffected, but the per-class breakdown shifted by up to a factor of two. After re-running with corrected indexing, \lorem now achieves the lowest force MAE and RMSE in all six dimer classes (originally reported as ``best in all but one''). More importantly, the corrected per-class data no longer supports the originally published claim that the post-LR nonlinearity corrects the mismatch between \lorem's internal Coulomb exponent ($p=1$) and the physical multipole exponents ($p=1$ to $p=6$) of the dimer classes: relative force error grows with the dominant exponent, from $\sim\qty{5}{\percent}$ at charge--charge to over $\qty{70}{\percent}$ at apolar--apolar, and \cace (also $p=1$) shows the same trend. We have retracted that claim and replaced it with the weaker statement that the nonlinearity only partially compensates for the exponent mismatch, noting that an extension to multiple long-range exponents in parallel is a natural follow-up. \cref{fig:bio_dimers,fig:ablation-bio_dimers,fig:bio-dimers-rmse} and the biodimers paragraph in \cref{sec:experiments} are updated accordingly. We added the standard deviation to the plots to contextualize the errors more explicitly.
 
 \textbf{Benchmark Ewald vs.\ PME accuracy \emph{(minor)}.} The runtime benchmark in \cref{sec:apx-benchmark} used the default \texttt{torch-pme} settings for both methods, which do not deliver matched accuracy when used together (Ewald's error decays exponentially with the $k$-space cutoff, PME's only slowly with mesh spacing). We have re-run the benchmark with Ewald's $k$-space cutoff chosen to match PME's accuracy on a 64-atom rattled \ch{NaCl} reference. The headline ``$\sim\!40\times$ PME speedup at \num{4096} atoms'' becomes $\sim\!6\times$ (widening to $\sim\!15\times$ near Ewald's OOM ceiling), and the Ewald OOM ceiling moves from $\sim\!\num{8000}$ to $\sim\!\num{14000}$ atoms. The qualitative scaling story and all model rankings are unchanged.
+
+\textbf{Unit typo in \cref{sec:ap_equiv} \emph{(typo)}.} The rotational-invariance errors were reported in meV; the correct unit is eV. The values themselves are unchanged.
+
+\textbf{ADAPT table \emph{(minor)}.} Two values for the best-energy \lorem model in \cref{tab:adapt} came from a preliminary evaluation; they are corrected to match the archived predictions (force MAE 0.0136 → 0.0138, energy MAE 0.076 → 0.077). Rankings are unaffected.
 
 
 \bibliography{zotero, custom}
@@ -555,7 +559,7 @@ As opposed to a tensor product to $l=0$, this operation, inspired by the power s
 
 As explained in \cref{sec:lrmp,sec:apx-modules}, the potential at each atom, $\tV_i$ is equivariant because the long-range message passing step consists of equivariant operations: Addition and multiplication with a factor shared per $l$. In practical implementations of Ewald summation in periodic systems, there is one extra step: To prevent divergences, the total charge must be zero, which can be done either by simply subtracting the sum of the total charge from each charge, or equivalently, by subtracting an analytical correction from the potentials. Both approaches are equivalent, and since summation is equivariant, also do not break invariance. For this reason, the total procedure retains equivariance.
 
-To numerically confirm these considerations, we compute the mean absolute error of energy predictions over a degree $L=3$ Lebedev grid of rotations \citep{dapbc2026pre}, plus inversions, with respect to the unrotated case, for the first \num{5} structures of the MgO surface validation set. The errors are in line with precision expectations: For single precision, \qty{1.031e-6}{meV} and for double precision \qty{5.913e-15}{meV}.
+To numerically confirm these considerations, we compute the mean absolute error of \rev{total} energy predictions over a degree $L=3$ \revs{Lebedev}\rev{Gauss--Legendre} grid of rotations \citep{dapbc2026pre}, plus inversions, with respect to the unrotated case, for the first \num{5} structures of the MgO surface validation set. The errors are in line with precision expectations: For single precision, \revs{\qty{1.031e-6}{meV}}\rev{\qty{1.031e-6}{eV}} and for double precision \revs{\qty{5.913e-15}{meV}}\rev{\qty{5.913e-15}{eV}}.
 
 
 \section{Dataset construction}
@@ -775,7 +779,7 @@ Removing the long-range message-passing block significantly increases error and 
         \node (figure) at (0.0,0) {\includegraphics[scale=0.63]{figures/biodimers_supp_lorem_l012.pdf} };
     \end{tikzpicture}
     \caption{
-    Mean absolute error on forces for different \revs{models}\rev{\lorem variants} on the different dimer classes\revs{: Apolar-apolar (AA), charge-apolar (CA), charge-charge (CC), charge-polar (CP), polar-apolar (PA), polar-polar (PP)}\rev{, ordered by increasing dominant power-law exponent $p$ (CC, CP, PP, CA, PA, AA; see \cref{fig:bio-dimers-rmse}). Black bars indicate the per-class standard deviation of $|\mathbf{F}|$}.
+    Mean absolute error on forces for different \revs{models}\rev{\lorem variants} on the different dimer classes\revs{: Apolar-apolar (AA), charge-apolar (CA), charge-charge (CC), charge-polar (CP), polar-apolar (PA), polar-polar (PP)}\rev{, ordered by increasing dominant power-law exponent $p$ (CC, CP, PP, CA, PA, AA; see \cref{fig:bio-dimers-rmse}). Black bars indicate the per-class standard deviation of force components}.
     }
     \label{fig:ablation-bio_dimers}
 \end{figure}
@@ -854,7 +858,7 @@ To assess sensitivity to random initialization and dataset shuffling, we also re
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.65]{figures/biodimers_rmse.pdf}
-    \caption{Root mean squared error on forces for different models on the different dimer classes\rev{: charge-charge (CC, $\sim r^{-1}$), charge-polar (CP, $\sim r^{-2}$), polar-polar (PP, $\sim r^{-3}$), charge-apolar (CA, $\sim r^{-4}$), polar-apolar (PA, $\sim r^{-5}$), apolar-apolar (AA, $\sim r^{-6}$). Black bars indicate the per-class standard deviation of $|\mathbf{F}|$}. Compare with \cref{fig:bio_dimers} in the main text, which shows MAE.}
+    \caption{Root mean squared error on forces for different models on the different dimer classes\rev{: charge-charge (CC, $\sim r^{-1}$), charge-polar (CP, $\sim r^{-2}$), polar-polar (PP, $\sim r^{-3}$), charge-apolar (CA, $\sim r^{-4}$), polar-apolar (PA, $\sim r^{-5}$), apolar-apolar (AA, $\sim r^{-6}$). Black bars indicate the per-class standard deviation of force components}. Compare with \cref{fig:bio_dimers} in the main text, which shows MAE.}
     \label{fig:bio-dimers-rmse}
 \end{figure}
 
@@ -880,7 +884,7 @@ Results are shown in \cref{tab:adapt}, reporting the best force MAE and best ene
     Model & $\F$ MAE (\unit{eV\per\angstrom}) & $E$ MAE (\unit{eV}) \\
     \midrule
     \lorem (best $\F$) & \underline{\num{0.0128}} & \underline{\num{0.097}} \\
-    \lorem (best $E$)  & \num{0.0136} & \textbf{\num{0.076}} \\
+    \lorem (best $E$)  & \revs{\num{0.0136}}\rev{\num{0.0138}} & \textbf{\revs{\num{0.076}}\rev{\num{0.077}}} \\
     \midrule
     ADAPT Small        & \textbf{\num{0.0126}} & \num{0.578} \\
     ADAPT Large        & \num{0.0136} & -- \\
