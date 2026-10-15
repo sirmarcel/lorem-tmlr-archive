@@ -4,7 +4,7 @@ This archive is a supplement to the TMLR paper ["Learning Long-Range Representat
 
 **Note:** The input files in this repository have been lightly updated to be compatible with the reference implementation of LOREM, [`lorem-jax`](https://github.com/lab-cosmo/lorem-jax) to aid future reproduction. The results in the paper were generated with different pre-release versions of both LOREM and the backend libraries [`marathon`](https://github.com/sirmarcel/marathon) and [`jax-pme`](https://github.com/lab-cosmo/jax-pme). Copies of the original code can be found in the submission data share at [doi:10.5281/zenodo.17789350](https://doi.org/10.5281/zenodo.17789350).
 
-**Note:** This archive contains updated results for biodimers (Fig. 4) and the benchmark (Fig. 6) that, as of August 2026, are not yet reflected on the TMLR-published version of the paper. We will update the Github archive once the revised version has been published, and likely leave Zenodo unchanged.
+**Note:** This archive contains updated results for biodimers (Fig. 4) and the benchmark (Fig. 6) that, as of October 2026, are not yet reflected on the TMLR-published version of the paper. We will update the Github archive once the revised version has been published, and likely leave Zenodo unchanged.
 
 ***
 
